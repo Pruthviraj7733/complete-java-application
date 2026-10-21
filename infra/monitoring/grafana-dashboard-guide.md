@@ -1,0 +1,2 @@
+# Grafana dashboard suggestions
+Install kube-prometheus-stack and watch kube_deployment_status_replicas_available, kube_pod_container_status_restarts_total, container_cpu_usage_seconds_total, and container_memory_working_set_bytes. JSP application does not expose application metrics; add JMX exporter for JVM metrics. Configure Alertmanager notification receiver separately; no alert destination credentials in Git.
