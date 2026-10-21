@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: java-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Pruthviraj7733/complete-java-application.git
+    targetRevision: dev
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: java-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions: [CreateNamespace=true]
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: java-uat
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Pruthviraj7733/complete-java-application.git
+    targetRevision: uat
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: java-uat
+  syncPolicy:
+    syncOptions: [CreateNamespace=true]
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: java-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Pruthviraj7733/complete-java-application.git
+    targetRevision: main
+    path: k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: java-prod
+  syncPolicy:
+    syncOptions: [CreateNamespace=true]
