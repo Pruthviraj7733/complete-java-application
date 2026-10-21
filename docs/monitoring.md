@@ -1,0 +1,2 @@
+# Monitoring
+kube-prometheus-stack includes Prometheus, Grafana, Alertmanager and kube-state-metrics. Apply infra/monitoring/java-alert-rules.yaml after operator is installed. The JSP demo does not expose Prometheus application metrics: use kube-state-metrics/ingress-controller and add Java/JMX exporter before claiming JVM metrics. Verify metrics-server for HPA. Configure notifications/receivers separately, store webhook credentials outside Git.

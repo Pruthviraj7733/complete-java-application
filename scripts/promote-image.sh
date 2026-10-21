@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
-: "${1:?Provide ECR image URI with @sha256 digest}"
-case "$1" in *@sha256:*) ;; *) echo 'Immutable digest required' >&2; exit 1;; esac
-: "${2:?Provide target environment branch checkout}"
-case "$2" in uat|main) ;; *) echo 'Only uat or main promotion supported' >&2; exit 1;; esac
-sed -i -E "s#image: .*#image: $1#" k8s/deployment.yaml
-echo 'Review git diff, open PR, and obtain approval before merging. No deployment performed.'
+image="${1:?Provide ECR image URI with sha256 digest}"
+target="${2:?Target branch uat or main}"
+case "$image" in *@sha256:*) ;; *) echo 'Require immutable @sha256 digest' >&2; exit 1;; esac
+case "$target" in uat|main) ;; *) echo 'Target must be uat or main' >&2; exit 1;; esac
+actual="$(git branch --show-current)"
+[ "$actual" = "$target" ] || { echo "Checkout branch $target first (current: $actual)" >&2; exit 1; }
+sed -i -E "s#image: .*#image: $image#" k8s/deployment.yaml
+echo 'Updated GitOps desired image. Commit, open PR, obtain approvals; do not deploy directly.'
+git diff -- k8s/deployment.yaml
