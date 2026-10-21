@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: java-config
+  namespace: java-dev
+data:
+  APP_ENV: dev

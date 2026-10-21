@@ -1,3 +1,2 @@
 # Complete Java Application
-
-Production-style Java JSP delivery across DEV, UAT, PROD on a shared EKS cluster. Infrastructure and credentials must be provisioned separately. Do not deploy to AWS until costs and prerequisites are reviewed.
+Production-style training blueprint for Jenkins, SonarQube, Trivy, ECR, Argo CD and EKS. Branches dev, uat and main target namespaces java-dev, java-uat and java-prod respectively. Deployment requires external infrastructure, credentials, DNS, and replacing image digest placeholders. See docs/prerequisites.md.
