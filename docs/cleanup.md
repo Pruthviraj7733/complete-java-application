@@ -1,0 +1,2 @@
+# Cleanup
+1. Export/backup any required data. 2. Remove Argo CD Applications after disabling automatic sync. 3. Delete Ingress resources and wait for ALB cleanup. 4. Uninstall Helm controllers/monitoring. 5. Delete EKS via eksctl delete cluster -f infra/eks/eks-cluster.yaml. 6. Inspect ECR, EBS, ALBs, IAM, CloudWatch, public IPs and VPC for remaining charges. Confirm resources and billing in AWS Console.
