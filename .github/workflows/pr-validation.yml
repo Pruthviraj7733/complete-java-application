@@ -2,9 +2,32 @@ name: PR validation
 on:
   pull_request:
     branches: [dev, uat, main]
+  workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: test -s Dockerfile && test -s app/index.jsp
+      - name: Validate shell and YAML
+        run: |
+          python3 -m pip install pyyaml
+          bash ci/test.sh
+          bash scripts/validate.sh
+      - name: Kubernetes Kustomize render
+        run: kubectl kustomize k8s >/tmp/rendered.yaml
+      - name: Prevent cross-environment configuration
+        env:
+          TARGET_BRANCH: "${{ github.base_ref }}"
+        run: |
+          set -euo pipefail
+          case "$TARGET_BRANCH" in
+            dev) ns=java-dev ;;
+            uat) ns=java-uat ;;
+            main) ns=java-prod ;;
+            *) echo 'Unrecognized target branch'; exit 1 ;;
+          esac
+          grep -Eq "^[[:space:]]*name: $ns$" k8s/namespace.yaml
+          grep -q "namespace: $ns" k8s/deployment.yaml
+          grep -q "namespace: $ns" argocd/application.yaml
