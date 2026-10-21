@@ -1,0 +1,13 @@
+# Production readiness gate
+- [ ] All credentials stored in Jenkins/AWS Secrets Manager, not Git
+- [ ] TLS certificate and owned DNS names configured (example.com is placeholder)
+- [ ] VPC, IRSA and least-privilege IAM verified
+- [ ] Immutable ECR digest promoted and signed/verified as policy requires
+- [ ] Image and IaC scans pass, SonarQube quality gate passes
+- [ ] Automated unit, integration, smoke and UAT tests pass
+- [ ] Resource requests/limits, HPA, PDB, probes and monitoring verified
+- [ ] NetworkPolicy enforcement confirmed with CNI
+- [ ] Backup, disaster recovery, rollout and rollback tested
+- [ ] Production approval, protected branches and required checks enforced
+- [ ] No shared ALB IngressGroup permission to untrusted namespaces
+- [ ] AWS costs and cleanup reviewed
