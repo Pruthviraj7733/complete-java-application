@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: java-application
-  namespace: java-dev
+  namespace: java-prod
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

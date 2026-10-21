@@ -2,7 +2,7 @@ apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: java-pdb
-  namespace: java-dev
+  namespace: java-prod
 spec:
   minAvailable: 1
   selector:
