@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: java-quota
-  namespace: java-dev
+  namespace: java-uat
 spec:
   hard:
     pods: '10'
