@@ -1,0 +1,6 @@
+clusterName: complete-java-cluster
+region: ap-south-1
+vpcId: REPLACE_VPC_ID
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller
