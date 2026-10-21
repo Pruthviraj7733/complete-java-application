@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: java-application-alerts
+  namespace: monitoring
+spec:
+  groups:
+    - name: java-application
+      rules:
+        - alert: JavaDeploymentUnavailable
+          expr: kube_deployment_status_replicas_available{deployment="java-application"} == 0
+          for: 5m
+          labels:
+            severity: critical
+          annotations:
+            summary: Java deployment has zero available replicas
