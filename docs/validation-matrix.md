@@ -1,0 +1,11 @@
+# Actual evidence to collect
+- [x] Repository exists
+- [x] Branch-specific Kubernetes namespace manifests created
+- [ ] Docker build and local smoke test
+- [ ] Trivy and SonarQube checks passed
+- [ ] Jenkins build/push and ECR digest verified
+- [ ] EKS nodes and ALB controller deployed
+- [ ] DEV GitOps reconciliation verified
+- [ ] UAT approval and GitOps reconciliation verified
+- [ ] PROD approval and GitOps reconciliation verified
+- [ ] HTTPS, DNS, alerts, HPA, NetworkPolicy, rollback validated
